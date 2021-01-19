@@ -1,10 +1,21 @@
 from django.contrib import admin
 
-from .models import Venta, Cliente, Sandwich, Ingrediente, CliSan, SanIng
+from .models import *
 
-admin.site.register(Venta)
+class VentaAdmin(admin.ModelAdmin):
+    list_display = ('monto_total', 'fecha',)
+admin.site.register(Venta, VentaAdmin)
+
 admin.site.register(Cliente)
-admin.site.register(Sandwich)
-admin.site.register(Ingrediente)
+
+class SDAdmin(admin.ModelAdmin):
+    list_display = ('size', 'precio',)
+admin.site.register(Sandwich, SDAdmin)
+
+class IngAdmin(admin.ModelAdmin):
+    list_display = ('nombre', 'precio',)
+admin.site.register(Ingrediente, IngAdmin)
+
 admin.site.register(CliSan)
+
 admin.site.register(SanIng)

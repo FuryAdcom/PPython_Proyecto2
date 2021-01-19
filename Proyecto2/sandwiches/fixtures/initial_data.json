@@ -1,0 +1,82 @@
+[
+    {
+        "model": "sandwiches.Sandwich",
+        "pk": 1,
+        "fields": {
+        "size": "Individual",
+        "precio": "280.0"
+        }
+    },
+    {
+        "model": "sandwiches.Sandwich",
+        "pk": 2,
+        "fields": {
+        "size": "Doble",
+        "precio": "430.0"
+        }
+    },
+    {
+        "model": "sandwiches.Sandwich",
+        "pk": 3,
+        "fields": {
+            "size": "Triple",
+            "precio": "580.0"
+        }
+    },
+    {
+        "model": "sandwiches.Ingrediente",
+        "pk": 1,
+        "fields": {
+            "nombre": "Jamón",
+            "precio": "40.0"
+        }
+    },
+    {
+        "model": "sandwiches.Ingrediente",
+        "pk": 2,
+        "fields": {
+            "nombre": "Champiñones",
+            "precio": "35.0"
+        }
+    },
+    {
+        "model": "sandwiches.Ingrediente",
+        "pk": 3,
+        "fields": {
+            "nombre": "Pimentón",
+            "precio": "30.0"
+        }
+    },
+    {
+        "model": "sandwiches.Ingrediente",
+        "pk": 4,
+        "fields": {
+            "nombre": "Doble queso",
+            "precio": "40.0"
+        }
+    },
+    {
+        "model": "sandwiches.Ingrediente",
+        "pk": 5,
+        "fields": {
+            "nombre": "Aceitunas",
+            "precio": "57.5"
+        }
+    },
+    {
+        "model": "sandwiches.Ingrediente",
+        "pk": 6,
+        "fields": {
+            "nombre": "Pepperoni",
+            "precio": "38.5"
+        }
+    },
+    {
+        "model": "sandwiches.Ingrediente",
+        "pk": 7,
+        "fields": {
+            "nombre": "Salchichón",
+            "precio": "62.5"
+        }
+    }
+  ]

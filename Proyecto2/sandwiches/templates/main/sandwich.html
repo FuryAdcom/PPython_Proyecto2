@@ -1,0 +1,44 @@
+{% extends "main/index.html" %}
+
+{% block content %}
+{% if name %}
+<h2>¡Bienvenido {{ name }}!</h2>
+{% endif %}
+<a>Para escoger su sandwich por favor llene el formulario:</a>
+
+<form method="post">
+    {% csrf_token %}
+    <input type="hidden" name="venta" value="{{ v.id }}">
+    <div class="form-group">
+        <label for="tamano">Tamaño del sandwich:</label>
+        <select class="form-control" name="size" id="tamano">
+            {% for s in sd %}
+            <option value="{{ s.size }}">{{s.size}}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="form-group">
+        <a>Ingredientes extras:</a>
+        <div class="row">
+            <div class="form-check form-check-inline col-sm-5">
+                <input class="form-check-input" type="checkbox" name="spice" id="ingdef" value="default" checked disabled>
+                <label class="form-check-label" for="ingdef">Estándar</label>
+            </div>
+            {% for i in ing %}
+            <div class="form-check form-check-inline col-sm-5">
+                <input class="form-check-input" type="checkbox" name="spice" id="ing{{ i.id }}" value="{{ i.nombre }}">
+                <label class="form-check-label" id="ing{{ i.id }}">{{ i.nombre }}</label>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <button type="submit" name="add" class="btn btn-primary">Agregar sandwich</button>
+</form>
+<form>
+    <!--Modal box-->
+    <button type="submit" name="cancelar" class="btn btn-primary">Cancelar pedido</button>
+    <button type="submit" name="confirm" class="btn btn-primary">Confirmar pedido</button>
+</form method="post">
+{% endblock %}

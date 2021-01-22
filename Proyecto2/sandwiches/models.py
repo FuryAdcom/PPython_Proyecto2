@@ -26,5 +26,5 @@ class Ingrediente(models.Model):
 
 # Las m-m son para no tener que hardcodear en la aplicación los precios y tener los tipos con sus montos almacenados en la base, solo necesitando linkear sus respectivas foráneas.
 class SanIng(models.Model):
-    fk_sandwich = models.ForeignKey(Sandwich, on_delete=models.CASCADE)
+    fk_sandwich = models.ForeignKey(CliSan, on_delete=models.CASCADE)
     fk_ingrediente = models.ForeignKey(Ingrediente, on_delete=models.CASCADE)

@@ -1,8 +1,8 @@
 from django.db import models
 
 class Venta(models.Model):
-    monto_total = models.FloatField()
-    fecha = models.DateTimeField('fecha de venta')
+    monto_total = models.FloatField(null=True)
+    fecha = models.DateTimeField('fecha de venta', null=True)
 
 class Cliente(models.Model):
     #cedula = models.IntegerField(primary_key=True, max_length=15) Si se coloca cédula, habría que modificar los modelos para identificar el mismo cliente.

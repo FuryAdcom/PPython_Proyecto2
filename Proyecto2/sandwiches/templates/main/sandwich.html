@@ -8,7 +8,7 @@
 
 <form method="post">
     {% csrf_token %}
-    <input type="hidden" name="venta" value="{{ v.id }}">
+    <input type="hidden" name="venta" value="{{ venta.id }}">
     <div class="form-group">
         <label for="tamano">Tamaño del sandwich:</label>
         <select class="form-control" name="size" id="tamano">
@@ -35,7 +35,7 @@
     </div>
 
     <button type="submit" name="add" class="btn btn-primary">Agregar sandwich</button>
-    {% if cli %}
+    {% if v %}
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#SDModal">Ver resumen de la orden</button>
     {% endif %}
 </form>
@@ -52,11 +52,29 @@
                 </button>
             </div>
             <div class="modal-body">
-                Objetos
+                {% for s in cs %}
+                {% for x in sd %}
+                {% if s.fk_sandwich.id == x.pk %}
+                    <h4>{{ x.size }} - Precio: {{ x.precio }}</h4>
+                    {% for a in ci %}
+                    {% if a.fk_sandwich.id == s.id %}
+                    {% for y in ing %}
+                    {% if a.fk_ingrediente.id == y.pk %}
+                        <h5 style="padding-left: 10px;">{{ y.nombre }} - Precio: {{ y.precio }}</h5>
+                    {% endif %}
+                    {% endfor %}
+                    {% endif %}
+                    {% endfor %}
+                {% endif %}
+                {% endfor %}
+                {% endfor %}
+                <h4>{{v.monto_total}}</h4>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                 <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="venta" value="{{ v.id }}">
                     <button type="submit" name="confirm" class="btn btn-primary">Confirmar pedido</button>
                 </form>
                 <button type="button" class="btn btn-danger" data-dismiss="modal" data-toggle="modal" data-target="#CancelModal">Cancelar pedido</button>
@@ -77,6 +95,8 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#SDModal">No, regresar</button>
                 <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="venta" value="{{ v.id }}">
                     <button type="submit" name="cancelar" class="btn btn-danger">Sí, cancelar pedido</button>
                 </form>
             </div>

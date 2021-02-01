@@ -1,0 +1,21 @@
+{% extends "main/index.html" %}
+
+{% block content %}
+
+{% if alert %}
+<div class="alert alert-{{alert.0}}" role="alert">
+    Compra {{alert.1}} satisfactoriamente.
+</div>
+{% endif %}
+
+<form action="/formulario/" method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="nombre">Por favor, inserte su nombre:</label>
+        <input class="form-control" type="text" name="name" id="nombre" placeholder="Nombre" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Continuar</button>
+</form>
+
+{% endblock %}

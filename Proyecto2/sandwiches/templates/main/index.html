@@ -20,14 +20,13 @@
         <div class="container">
             <h1>Sandwiches UCAB</h1>
 
-            <form action="">
-                
-            </form>
-
+            {% block content %}{% endblock %}
+            
         </div>
         
         {# JS y jQuery Bootstrap #}
         {% bootstrap_javascript jquery='full' %}
+        {% block jsscripts %}{% endblock %}
     
     </body>
 </html>

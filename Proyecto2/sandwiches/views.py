@@ -42,7 +42,7 @@ def formulario(request):
         venta.monto_total = monto
         venta.save()
 
-        return render(request, 'main/sandwich.html', {'sd': sd, 'ing': ing, 'cs': cs, 'ci': ci, 'v': venta})
+        return render(request, 'main/sandwich.html', {'sd': sd, 'ing': ing, 'cs': cs, 'ci': ci, 'venta': venta})
 
     elif request.method == 'POST' and 'confirm' in request.POST: 
         venta = Venta.objects.get(pk=request.POST['venta'])

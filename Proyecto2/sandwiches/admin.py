@@ -24,7 +24,7 @@ class VentaAdmin(admin.ModelAdmin):
            # Anything else you want in the context...
            key=1,
         )
-        return TemplateResponse(request, "main/ventas.html", context)
+        return TemplateResponse(request, "admin/ventas.html", context)
     # ing = Ingrediente.objects.all()
     # ventas = Venta.objects.all()
     # sd = Sandwich.objects.all()

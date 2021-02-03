@@ -78,5 +78,54 @@
             "nombre": "Salchichón",
             "precio": "62.5"
         }
+    },
+    {
+        "model": "sandwiches.Refresco",
+        "pk": 1,
+        "fields": {
+            "nombre": "Coke",
+            "precio": "140"
+        }
+        
+    },
+    {
+        "model":"sandwiches.Refresco",
+        "pk": 2,
+        "fields":{
+            "nombre": "7up",
+            "precio": "140"
+        }
+    },
+    {
+        "model":"sandwiches.Refresco",
+        "pk":3,
+        "fields":{
+            "nombre": "Kolita",
+            "precio": "140"
+        }
+    },
+    {
+        "model":"sandwiches.Refresco",
+        "pk":4,
+        "fields":{
+            "nombre": "Uva",
+            "precio": "140"
+        }
+    },
+    {
+        "model":"sandwiches.Refresco",
+        "pk":5,
+        "fields":{
+            "nombre": "Coke Light",
+            "precio": "140"
+        }
+    },
+    {
+        "model":"sandwiches.Refresco",
+        "pk":6,
+        "fields":{
+            "nombre": "Malta",
+            "precio": "110"
+        }
     }
   ]

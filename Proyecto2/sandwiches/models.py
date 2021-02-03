@@ -28,3 +28,11 @@ class Ingrediente(models.Model):
 class SanIng(models.Model):
     fk_sandwich = models.ForeignKey(CliSan, on_delete=models.CASCADE)
     fk_ingrediente = models.ForeignKey(Ingrediente, on_delete=models.CASCADE)
+
+class Refresco(models.Model):
+    nombre = models.CharField(max_length=15)
+    precio = models.FloatField()
+
+class CliRef(models.Model):
+    fk_cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+    fk_refresco = models.ForeignKey(Refresco, on_delete=models.CASCADE)

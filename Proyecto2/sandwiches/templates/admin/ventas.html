@@ -1,0 +1,32 @@
+{% extends "admin/base_site.html" %}
+{% block content %}
+
+<table id="tablaVentas" class="display" style="width:100%">
+    <thead>
+        <tr>
+            <th>ID venta</th>
+            <th>Monto</th>
+            <th>Fecha</th>
+            <th>Nombre</th>
+            <th>Sandwich</th>
+            <th>Tamaño</th>
+            <th>Ingrediente</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in lista %}
+        <tr>
+            {% for y in i %}
+            <td>{{y}}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<script type="text/javascript">
+    $(document).ready( function () {
+        $('#tablaVentas').DataTable();
+    } );
+</script>
+{% endblock %}

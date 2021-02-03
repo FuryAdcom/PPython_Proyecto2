@@ -1,12 +1,14 @@
 {% extends "main/index.html" %}
 
+<!-- Tristeza -->
+
 {% block content %}
 {% if name %}
 <h2>¡Bienvenido {{ name }}!</h2>
 {% endif %}
 <a>Para escoger su sandwich por favor llene el formulario:</a>
 
-<form method="post">
+<form action='/formulario/' method="post">
     {% csrf_token %}
     <input type="hidden" name="venta" value="{{ venta.id }}">
     <div class="form-group">
@@ -35,10 +37,44 @@
     </div>
 
     <button type="submit" name="add" class="btn btn-primary">Agregar sandwich</button>
+<<<<<<< HEAD
+    <a class="btn btn-primary" onclick="ocultar()">Extras</a>
+=======
     {% if cs %}
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#SDModal">Ver resumen de la orden</button>
     {% endif %}
+>>>>>>> origin
 </form>
+
+<div id='extras' style='display: none'>
+    <form action='/extras/' method="post">
+        {% csrf_token %}
+        <input type="hidden" name="venta" value="{{ venta.id }}">
+        <div class="form-group">
+            <label class="mt-4">Refrescos:</label>
+            <div class="row">
+                {% for i in ref %}
+                <div class="form-check form-check-inline col-sm-5">
+                    <div class="col-sm-2">
+                        <label class="form-check-label" id="refs{{ i.id }}">{{ i.nombre }}</label>
+                    </div>
+                    <div class="col-sm-1">
+                        <input class="form-check-input" type="checkbox" name="refres" id="refs{{ i.id }}" value="{{ i.id }}">
+                    </div>
+                    <div class="col-sm-5">
+                        <input class="form-control" type="number" min="0" name="refcant{{ i.id }}" id="refs{{ i.id }}" placeholder="Cantidad">
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Agregar extras</button>
+    </form>
+</div>
+
+{% if cs or cr %}
+    <button type="button" class="btn btn-info mt-4" style="width: 100%" data-toggle="modal" data-target="#SDModal">Ver resumen de la orden</button>
+{% endif %}
 
 <!--Modal boxes-->
 
@@ -52,6 +88,7 @@
                 </button>
             </div>
             <div class="modal-body">
+                <h3>Sandwiches</h3>
                 {% for s in cs %}
                 {% for x in sd %}
                 {% if s.fk_sandwich.id == x.pk %}
@@ -68,11 +105,21 @@
                 {% endif %}
                 {% endfor %}
                 {% endfor %}
-                <h4>{{v.monto_total}}</h4>
+
+
+                <h3>Extras</h3>
+                {% for r in cr %}
+                {% for z in ref %}
+                {% if r.fk_refresco.id == z.pk %}
+                    <h4>{{ z.nombre }} - Precio: {{ z.precio }}</h4>
+                {% endif %}
+                {% endfor %}
+                {% endfor %}
+                <h4>Total: {{ venta.monto_total }}</h4>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <form method="post">
+                <form action='/formulario/' method="post">
                     {% csrf_token %}
                     <input type="hidden" name="venta" value="{{ venta.id }}">
                     <button type="submit" name="confirm" class="btn btn-primary">Confirmar pedido</button>
@@ -94,7 +141,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#SDModal">No, regresar</button>
-                <form method="post">
+                <form action='/formulario/' method="post">
                     {% csrf_token %}
                     <input type="hidden" name="venta" value="{{ venta.id }}">
                     <button type="submit" name="cancelar" class="btn btn-danger">Sí, cancelar pedido</button>
@@ -107,6 +154,13 @@
 
 {% block jsscripts %}
 <script>
-
+    function ocultar() {
+        var x = document.getElementById("extras");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
 </script>
 {% endblock %}

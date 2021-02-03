@@ -11,6 +11,7 @@ def index(request):
 def formulario(request):
     sd = Sandwich.objects.all()
     ing = Ingrediente.objects.all()
+    ref = Refresco.objects.all()
 
     if request.method == 'POST' and 'add' in request.POST: 
         venta = Venta.objects.get(pk=request.POST['venta'])
@@ -28,6 +29,7 @@ def formulario(request):
         cs = cliente.clisan_set.all()
         csid = cs.values_list('id', flat=True)
         ci = SanIng.objects.filter(fk_sandwich__in=list(csid))
+        cr = cliente.cliref_set.all()
 
         monto = 0
         for sand in cs:
@@ -42,7 +44,11 @@ def formulario(request):
         venta.monto_total = monto
         venta.save()
 
+<<<<<<< HEAD
+        return render(request, 'main/sandwich.html', {'sd': sd, 'ing': ing, 'ref':ref, 'cs': cs, 'cr': cr, 'ci': ci, 'venta': venta})
+=======
         return render(request, 'main/sandwich.html', {'sd': sd, 'ing': ing, 'cs': cs, 'ci': ci, 'venta': venta})
+>>>>>>> origin
 
     elif request.method == 'POST' and 'confirm' in request.POST: 
         venta = Venta.objects.get(pk=request.POST['venta'])
@@ -68,4 +74,34 @@ def formulario(request):
 
         cliente = Cliente.objects.create(nombre=request.POST['name'], fk_venta=venta)
 
-        return render(request, 'main/sandwich.html', {'name': cliente.nombre, 'sd': sd, 'ing': ing, 'venta':venta})
+        return render(request, 'main/sandwich.html', {'name': cliente.nombre, 'ref':ref, 'sd': sd, 'ing': ing, 'venta':venta})
+
+def extra(request):
+    sd = Sandwich.objects.all()
+    ing = Ingrediente.objects.all()
+    ref = Refresco.objects.all()
+    
+    venta = Venta.objects.get(pk=request.POST['venta'])
+    cliente = Cliente.objects.get(fk_venta=venta.pk)
+    cs = cliente.clisan_set.all()
+    csid = cs.values_list('id', flat=True)
+    ci = SanIng.objects.filter(fk_sandwich__in=list(csid))
+
+    refrescos = request.POST.getlist('refres')
+
+    monto = 0
+
+    for re in refrescos:
+        r = Refresco.objects.get(pk=re)
+        cant = request.POST['refcant'+str(r.pk)]
+
+        for i in range(int(cant)):
+            CliRef.objects.create(fk_cliente=cliente,fk_refresco = r)
+            monto += r.precio
+
+    venta.monto_total += monto
+    venta.save()
+
+    cr = cliente.cliref_set.all()
+
+    return render(request, 'main/sandwich.html', {'ref': ref, 'sd': sd, 'ing': ing, 'cs': cs, 'cr': cr, 'ci': ci, 'venta':venta})

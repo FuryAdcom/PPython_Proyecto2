@@ -66,3 +66,9 @@ admin.site.register(Ingrediente, IngAdmin)
 admin.site.register(CliSan)
 
 admin.site.register(SanIng)
+
+class RefAdmin(admin.ModelAdmin):
+    list_display = ('nombre', 'precio',)
+admin.site.register(Refresco, RefAdmin)
+
+admin.site.register(CliRef)

@@ -5,9 +5,11 @@ import datetime
 
 from .models import *
 
+#funciones para agarrar el nombre de la persona
 def index(request):
     return render(request, 'main/getName.html')
 
+#funciones que se utilizan para los formularios 
 def formulario(request):
     sd = Sandwich.objects.all()
     ing = Ingrediente.objects.all()
@@ -44,11 +46,7 @@ def formulario(request):
         venta.monto_total = monto
         venta.save()
 
-<<<<<<< HEAD
         return render(request, 'main/sandwich.html', {'sd': sd, 'ing': ing, 'ref':ref, 'cs': cs, 'cr': cr, 'ci': ci, 'venta': venta})
-=======
-        return render(request, 'main/sandwich.html', {'sd': sd, 'ing': ing, 'cs': cs, 'ci': ci, 'venta': venta})
->>>>>>> origin
 
     elif request.method == 'POST' and 'confirm' in request.POST: 
         venta = Venta.objects.get(pk=request.POST['venta'])
@@ -76,6 +74,7 @@ def formulario(request):
 
         return render(request, 'main/sandwich.html', {'name': cliente.nombre, 'ref':ref, 'sd': sd, 'ing': ing, 'venta':venta})
 
+#funciones que se utilizan para los formularios de extras
 def extra(request):
     sd = Sandwich.objects.all()
     ing = Ingrediente.objects.all()

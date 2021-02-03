@@ -6,6 +6,7 @@ import datetime
 
 from .models import *
 
+#clase para agarrar los links relacionas a ventas
 class VentaAdmin(admin.ModelAdmin):
     list_display = ('monto_total', 'fecha')
     def get_urls(self):
@@ -15,6 +16,7 @@ class VentaAdmin(admin.ModelAdmin):
         ]
         return my_urls + urls
 
+    #funcion que agarra todos los datos de la venta
     def my_view(self, request):
         ing = Ingrediente.objects.all()
         ventas = Venta.objects.all()
@@ -51,10 +53,12 @@ admin.site.register(Venta, VentaAdmin)
 
 admin.site.register(Cliente)
 
+#para registrar los demas modelos en el apartado de admin
 class SDAdmin(admin.ModelAdmin):
     list_display = ('size', 'precio',)
 admin.site.register(Sandwich, SDAdmin)
 
+#para registrar los demas modelos en el apartado de admin
 class IngAdmin(admin.ModelAdmin):
     list_display = ('nombre', 'precio',)
 admin.site.register(Ingrediente, IngAdmin)
